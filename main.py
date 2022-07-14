@@ -8,7 +8,7 @@ Here are the songs he wrote I like the most:
 * Norwegian Wood
 * Come Together
 * In My Life
-* ~Hey Jude~ (that was *McCartney*)
+* ~~Hey Jude~~ (that was *McCartney*)
 """
 
 print(output_string)
