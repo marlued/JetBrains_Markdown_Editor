@@ -2,15 +2,14 @@
 
 available_formats = 'plain bold italic header link inline-code ordered-list unordered-list new-line'.split()
 program_running = True
-choose_format = 'Choose a formatter'
+choose_format = 'Choose a formatter: '
 error_message = 'Unknown formatting type or command'
-help_message = 'Available formatters: plain bold italic header link inline-code ordered-list unordered-list' \
+help_message = 'Available formatters: plain bold italic header link inline-code ordered-list unordered-list ' \
                'new-line\nSpecial commands: !help !done'
 
 while program_running:
 
-    print(choose_format)
-    user_input = input().strip()
+    user_input = input(choose_format).strip()
 
     if user_input == '!done':
         break
