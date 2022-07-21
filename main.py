@@ -1,26 +1,111 @@
-# initialize required variables
+def headings():
+    valid_levels = range(1, 7)
+    level_outputs = {1: '#',
+                     2: '##',
+                     3: '###',
+                     4: '####',
+                     5: '#####',
+                     6: '######'}
+    level = int(input('Level: ').strip())
+    text = input('Text: ').strip()
+    if level not in valid_levels:
+        raise IndexError('Level not in allowed range')
+    if level in valid_levels:
+        return f'{level_outputs[level]} {text}\n\r'
 
-available_formats = 'plain bold italic header link inline-code ordered-list unordered-list new-line'.split()
-program_running = True
-choose_format = 'Choose a formatter: '
-error_message = 'Unknown formatting type or command'
-help_message = 'Available formatters: plain bold italic header link inline-code ordered-list unordered-list ' \
-               'new-line\nSpecial commands: !help !done'
 
-while program_running:
+def new_line():
+    return '\n'
 
-    user_input = input(choose_format).strip()
 
-    if user_input == '!done':
-        break
+def link():
+    label = input('Label: ').strip()
+    url = input('URL: ').strip()
+    return f'[{label}]({url})'
+
+
+def plain():
+    text = input('Text: ').strip()
+    return '{}'.format(text)
+
+
+def bold():
+    text = input('Text: ').strip()
+    return f'**{text}**'
+
+
+def italic():
+    text = input('Text: ').strip()
+    return f'*{text}*'
+
+
+def inline_code():
+    text = input('Text: ').strip()
+    return f'`{text}`'
+
+
+def _help():
+    print('Available formatters: plain bold italic header link inline-code'
+          'ordered-list unordered-list new-line\n'
+          'Special commands: !help !done')
+
+
+def done():
+    raise SystemExit()
+
+
+def choices():
+    user_input = input('Choose a formatter: ').strip()
+    output_text = None
+    valid_choices = ['header', 'bold', 'plain', 'inline-code',
+                     'new-line', 'link', '!help', '!done']
+
+    if user_input not in valid_choices:
+        raise RuntimeError('No valid Choice')
+
+    if user_input == 'header':
+        output_text = headings()
+
+    if user_input == 'bold':
+        output_text = bold()
+
+    if user_input == 'plain':
+        output_text = plain()
+
+    if user_input == 'inline-code':
+        output_text = inline_code()
+
+    if user_input == 'new-line':
+        output_text = new_line()
+
+    if user_input == 'link':
+        output_text = link()
 
     if user_input == '!help':
-        print(help_message)
+        _help()
+
+    if user_input == '!done':
+        done()
+
+    return output_text
+
+
+full_output = []
+
+while True:
+    try:
+        new_item = choices()
+    except IndexError:
+        print('The level should be within the range of 1 to 6')
+        continue
+    except RuntimeError:
+        print('Unknown formatting type or command')
         continue
 
-    if user_input not in available_formats:
-        print(error_message)
+    full_output.append(new_item)
+    try:
+        print(' \r'.join(full_output))
+    except TypeError:
         continue
 
-    if user_input in available_formats:
-        continue
+    continue
