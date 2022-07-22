@@ -83,6 +83,7 @@ def choices():
 
     if user_input == '!help':
         _help()
+        raise IndexError('should not be appended to list')
 
     if user_input == '!done':
         done()
@@ -93,19 +94,14 @@ def choices():
 full_output = []
 
 while True:
+
     try:
-        new_item = choices()
+        to_output = choices()
+
     except IndexError:
-        print('The level should be within the range of 1 to 6')
-        continue
-    except RuntimeError:
-        print('Unknown formatting type or command')
         continue
 
-    full_output.append(new_item)
-    try:
-        print(' \r'.join(full_output))
-    except TypeError:
-        continue
+    full_output.append(to_output)
 
-    continue
+    for item in full_output:
+        print(item)
