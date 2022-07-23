@@ -7,9 +7,12 @@ def headings():
                      5: '#####',
                      6: '######'}
     level = int(input('Level: ').strip())
-    text = input('Text: ').strip()
+
     if level not in valid_levels:
-        raise IndexError('Level not in allowed range')
+        raise AttributeError('Level not in allowed range')
+
+    text = input('Text: ').strip()
+
     if level in valid_levels:
         return f'{level_outputs[level]} {text}\n\r'
 
@@ -101,12 +104,18 @@ while True:
     try:
         to_output = choices()
 
+    except AttributeError:
+        print('The level should be within the range of 1 to 6')
+        continue
+
     except IndexError:
         continue
 
     except RuntimeError:
         print('Unknown formatting type or command')
         continue
+
+
 
     full_output.append(to_output)
 
