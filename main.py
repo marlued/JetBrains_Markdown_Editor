@@ -21,27 +21,27 @@ def new_line():
 def link():
     label = input('Label: ').strip()
     url = input('URL: ').strip()
-    return f'[{label}]({url})'
+    return f'[{label}]({url}) '  # added space for printing
 
 
 def plain():
     text = input('Text: ').strip()
-    return '{}'.format(text)
+    return '{} '.format(text)  # added space for printing
 
 
 def bold():
     text = input('Text: ').strip()
-    return f'**{text}**'
+    return f'**{text}** '  # added space for printing
 
 
 def italic():
     text = input('Text: ').strip()
-    return f'*{text}*'
+    return f'*{text}* '  # added space for printing
 
 
 def inline_code():
     text = input('Text: ').strip()
-    return f'`{text}`'
+    return f'`{text}` '  # added space for printing
 
 
 def _help():
@@ -57,7 +57,7 @@ def done():
 def choices():
     user_input = input('Choose a formatter: ').strip()
     output_text = None
-    valid_choices = ['header', 'bold', 'plain', 'inline-code',
+    valid_choices = ['header', 'bold', 'italic', 'plain', 'inline-code',
                      'new-line', 'link', '!help', '!done']
 
     if user_input not in valid_choices:
@@ -68,6 +68,9 @@ def choices():
 
     if user_input == 'bold':
         output_text = bold()
+
+    if user_input == 'italic':
+        output_text = italic()
 
     if user_input == 'plain':
         output_text = plain()
@@ -101,7 +104,10 @@ while True:
     except IndexError:
         continue
 
+    except RuntimeError:
+        print('Unknown formatting type or command')
+        continue
+
     full_output.append(to_output)
 
-    for item in full_output:
-        print(item)
+    print(''.join(full_output))
