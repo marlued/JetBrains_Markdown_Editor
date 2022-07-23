@@ -59,7 +59,7 @@ def _help():
 
 
 def done():
-    raise SystemExit()
+    quit()
 
 
 def choices():
