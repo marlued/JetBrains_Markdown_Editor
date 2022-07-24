@@ -29,27 +29,27 @@ def new_line():
 def link():
     label = input('Label: ').strip()
     url = input('URL: ').strip()
-    return f'[{label}]({url}) '  # added space for printing
+    return f'[{label}]({url})'
 
 
 def plain():
     text = input('Text: ').strip()
-    return '{} '.format(text)  # added space for printing
+    return '{}'.format(text)
 
 
 def bold():
     text = input('Text: ').strip()
-    return f'**{text}** '  # added space for printing
+    return f'**{text}**'
 
 
 def italic():
     text = input('Text: ').strip()
-    return f'*{text}* '  # added space for printing
+    return f'*{text}*'
 
 
 def inline_code():
     text = input('Text: ').strip()
-    return f'`{text}` '  # added space for printing
+    return f'`{text}`'
 
 
 def _help():
@@ -118,4 +118,6 @@ while True:
 
     full_output.append(to_output)
 
-    print(''.join(full_output))
+    pre_string = ''.join(full_output)
+    output_string = pre_string.replace('\n ', '\n')
+
