@@ -118,7 +118,7 @@ while True:
 
     full_output.append(to_output)
 
-    pre_string = ' '.join(full_output)
+    pre_string = ''.join(full_output)
     output_string = pre_string.replace('\n ', '\n')
     print(output_string)
 
